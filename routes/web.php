@@ -3,15 +3,14 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserManagementController;
+use App\Livewire\Dashboard\HrDashboard;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::middleware(['auth', 'role:super_admin,hr'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', HrDashboard::class)->name('dashboard');
     Route::resource('users', UserManagementController::class);
     Route::get('/employees', App\Livewire\Employee\EmployeeList::class)->name('employees');
 });

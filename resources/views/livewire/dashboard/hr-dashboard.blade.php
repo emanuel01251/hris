@@ -17,11 +17,6 @@
                 </div>
             </div>
 
-            <!-- Employee List Section -->
-            <div class="col-span-3">
-                <livewire:employee.employee-list />
-            </div>
-
             <!-- Today's Attendance Card -->
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <div class="flex items-center">
