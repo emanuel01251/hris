@@ -46,10 +46,14 @@
                         </div>
                     </div>
 
-                    @if(Auth::user()->role === 'hr')
-                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')" class="inline-flex items-center px-3 py-2 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-600 hover:text-gray-900 hover:border-indigo-400 focus:outline-none focus:text-gray-900 focus:border-indigo-500 transition duration-150 ease-in-out">
-                            {{ __('User Management') }}
-                        </x-nav-link>
+                    @if(Auth::user()->role === 'hr' || Auth::user()->role === 'super_admin')
+                        <div class="relative">
+                            <button class="inline-flex items-center px-3 py-2 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-600 hover:text-gray-900 hover:border-indigo-400 focus:outline-none focus:text-gray-900 focus:border-indigo-500 transition duration-150 ease-in-out">
+                                <a href="{{ route('users.index') }}" class="text-current no-underline">
+                                    {{ __('User Management') }}
+                                </a>
+                            </button>
+                        </div>
                     @endif
                 </div>
             </div>
@@ -141,8 +145,8 @@
                 </div>
             </div>
 
-            @if(Auth::user()->role === 'hr')
-                <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+            @if(Auth::user()->role === 'hr' || Auth::user()->role === 'super_admin')
+                <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')" class="w-full flex items-center px-4 py-2 text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-indigo-50 focus:outline-none focus:text-gray-900 focus:bg-indigo-50 transition duration-150 ease-in-out">
                     {{ __('User Management') }}
                 </x-responsive-nav-link>
             @endif
