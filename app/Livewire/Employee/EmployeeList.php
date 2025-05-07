@@ -36,10 +36,8 @@ class EmployeeList extends Component
         // Get authenticated user's role
         $user = \Illuminate\Support\Facades\Auth::user();
         
-        // Filter employees based on role
-        if (!$user || !in_array($user->role, ['superadmin', 'hr'])) {
-            $query->where('id', $user->id); // Show only own record if not superadmin/hr
-        }
+        // Exclude super_admin users from the list
+        $query->where('role', '!=', 'super_admin');
 
         $employees = $query->orderBy($this->sortField, $this->sortDirection)
                           ->paginate(10);
