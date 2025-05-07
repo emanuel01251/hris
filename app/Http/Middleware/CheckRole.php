@@ -14,7 +14,14 @@ class CheckRole
         }
 
         foreach ($roles as $role) {
-            if ($request->user()->{"is".ucfirst($role)}()) {
+            // Check if the user has the required role directly
+            if ($request->user()->role === $role) {
+                return $next($request);
+            }
+            
+            // Also try the method approach as fallback
+            $methodName = 'is' . ucfirst($role);
+            if (method_exists($request->user(), $methodName) && $request->user()->$methodName()) {
                 return $next($request);
             }
         }
